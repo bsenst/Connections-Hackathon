@@ -13,7 +13,7 @@ token = st.secrets.db_credentials["token"]
 
 class MilvusConnection(ExperimentalBaseConnection[connections]):
     def _connect(self, **kwargs):
-        return connections.connect("default", uri=milvus_uri, token=token) # streamlit cloud deployment
+        return connections.connect("default", host="localhost", port="19530") # local deployment
     
     def has_collection(self, collection_name):
         return utility.has_collection(collection_name)

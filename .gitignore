@@ -1,4 +1,6 @@
 .venv
 volumes
+.streamlit/secrets.toml
+__pycache__
 hello_milvus.py
 docker-compose.yml

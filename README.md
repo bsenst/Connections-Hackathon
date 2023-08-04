@@ -1,6 +1,11 @@
 # Connections-Hackathon
 Submission to the Streamlit Connections Hackathon to demonstrate the experimental streamlit connector to connect the streamlit app to the Milvus vector database. The adapted connector can be found in the `connection.py` script.
 
+For the time of the Hackathon the app connected to the database backend can be reached at https://connections-hackathon-ltar9bp4kpm2hssniappyvr.streamlit.app/
+
+# Local Deployment
+Follow these steps to deploy the app locally.
+
 ## 1. Set up Milvus Vector Database
 Milvus is an open-source vector database under Apache-2 License.
 
@@ -37,7 +42,7 @@ Make sure streamlit you have a streamlit secrets file `secrets.toml` for optiona
 Run the example streamlit app:
 
 ```bash
-streamlit run streamlit_app.py
+streamlit run local_app.py
 ```
 
 ![image_showing_streamlit_running_milvus_queries](https://github.com/bsenst/Connections-Hackathon/assets/8211411/9ad40426-26b3-44c9-b996-83710234afb3)

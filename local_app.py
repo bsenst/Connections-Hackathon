@@ -1,7 +1,7 @@
 import time
 import numpy as np
 import streamlit as st
-from connection import MilvusConnection
+from connection_local import MilvusConnection
 
 fmt = "\n=== {:30} ===\n"
 search_latency_fmt = "search latency = {:.4f}s"
@@ -21,18 +21,21 @@ collections_list = conn.list_collections()
 for i, collection in enumerate(collections_list):
     st.code(f"{i} {collection} contains {conn.count_entities(collection)} entities")
 
-medium_articles = conn.get_collection("medium_articles")
+hello_milvus = conn.get_collection("hello_milvus")
+schema = hello_milvus.schema
+schema = medium_articles.schema
+fields = schema.fields
 
-id = st.slider('Choose a Medium Article', 0, 5978, 5978)
+# create random entity as example vector to query the database
+rng = np.random.default_rng(seed=19530)
+entities = [
+    # provide the pk field because `auto_id` is set to False
+    [str(i) for i in range(num_entities)],
+    rng.random(num_entities).tolist(),  # field random, only supports list
+    rng.random((num_entities, dim)),    # field embeddings, supports numpy.ndarray and list
+]
 
-res = medium_articles.query(
-  expr = f"id == {id}", 
-  output_fields = ["id", "title_vector", "publication", "link"]
-)
-
-st.write(f'{id} {res[0]["link"]}')
-
-vectors_to_search = [res[0]["title_vector"]]
+vectors_to_search = entities[-1][-2:]
 
 search_params = {
     "metric_type": "L2",
@@ -40,15 +43,14 @@ search_params = {
 }
 
 start_time = time.time()
-result = medium_articles.search(vectors_to_search, "title_vector", search_params, limit=6, output_fields=["publication", "link"])
+result = hello_milvus.search(vectors_to_search, "embeddings", search_params, limit=5, output_fields=["random"])
 end_time = time.time()
 
 if st.button("Perform L2 distance vector search"):
+    st.code(f"search vector: {vectors_to_search[0]}")
 
     for hits in result:
-        skip = [0]
         for i, hit in enumerate(hits):
-            if i not in skip:
-                st.write(hit)
+            st.write(hit)
     
     st.code(search_latency_fmt.format(end_time - start_time))
