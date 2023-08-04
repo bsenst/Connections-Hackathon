@@ -3,6 +3,8 @@ Submission to the Streamlit Connections Hackathon to demonstrate the experimenta
 
 For the time of the Hackathon the app connected to the database backend can be reached at https://connections-hackathon-ltar9bp4kpm2hssniappyvr.streamlit.app/
 
+![image_showing_streamlit_cloud_app_medium_semantic_search](https://github.com/bsenst/Connections-Hackathon/assets/8211411/932af0fc-2ad1-4141-ae64-6dda163b3874)
+
 # Local Deployment
 Follow these steps to deploy the app locally.
 
