@@ -1,14 +1,24 @@
 from streamlit.connections import ExperimentalBaseConnection
 from streamlit.runtime.caching import cache_data
 
-class Connection(ExperimentalBaseConnection[duckdb.DuckDBPyConnection]):
-    
+from pymilvus import (
+    connections,
+    utility,
+    Collection
+)
+
+class MilvusConnection(ExperimentalBaseConnection[connections]):
     def _connect(self, **kwargs):
-        return "_connect"
+        return connections.connect("default", host="localhost", port="19530")
     
-    def query(self, query: str, ttl: int = 3600, **kwargs):
-        @cache_data(ttl=ttl)
-        def _query(query: str, **kwargs):
-            return query
-        
-        return _query(query, **kwargs)
+    def has_collection(self, collection_name):
+        return utility.has_collection(collection_name)
+    
+    def list_collections(self):
+        return utility.list_collections()
+
+    def count_entities(self, collection_name):
+        return Collection(collection_name).num_entities
+    
+    def get_collection(self, collection_name):
+        return Collection(collection_name)
