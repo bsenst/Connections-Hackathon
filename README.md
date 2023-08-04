@@ -40,6 +40,8 @@ Run the example streamlit app:
 streamlit run streamlit_app.py
 ```
 
+![image_showing_streamlit_running_milvus_queries](https://github.com/bsenst/Connections-Hackathon/assets/8211411/9ad40426-26b3-44c9-b996-83710234afb3)
+
 ## 3. Clean up
 
 Stop the streamlit app by pressing `Ctrl-C`.
