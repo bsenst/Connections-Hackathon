@@ -1,5 +1,5 @@
 import streamlit as st
-from streamlit.connections import ExperimentalBaseConnection
+from streamlit.connections import BaseConnection
 from streamlit.runtime.caching import cache_data
 
 from pymilvus import (
@@ -11,7 +11,7 @@ from pymilvus import (
 milvus_uri = st.secrets.db_credentials["uri"]
 token = st.secrets.db_credentials["token"]
 
-class MilvusConnection(ExperimentalBaseConnection[connections]):
+class MilvusConnection(BaseConnection[connections]):
     def _connect(self, **kwargs):
         return connections.connect("default", uri=milvus_uri, token=token) # streamlit cloud deployment
     
