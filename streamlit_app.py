@@ -41,7 +41,7 @@ search_params = {
 }
 
 start_time = time.time()
-result = medium_articles.search(vectors_to_search, "title_vector", search_params, limit=6, output_fields=["publication", "link"])
+result = medium_articles.search_iterator(vectors_to_search, "title_vector", search_params, limit=6, output_fields=["publication", "link"])
 end_time = time.time()
 
 if st.button("Perform L2 distance vector search"):
