@@ -46,11 +46,12 @@ end_time = time.time()
 
 if st.button("Perform L2 distance vector search"):
 
-    for hits in result:
-        skip = [0]
-        st.write(hits)
-        # for i, hit in enumerate(hits):
-        #     if i not in skip:
-        #         st.write(hit)
+    st.write(result)
+
+    # for hits in result:
+    #     skip = [0]
+    #     for i, hit in enumerate(hits):
+    #         if i not in skip:
+    #             st.write(hit)
     
     st.code(search_latency_fmt.format(end_time - start_time))
