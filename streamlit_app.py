@@ -19,7 +19,8 @@ st.write("""This Streamlit application is for demonstration purposes.
 st.write("The following collections are inside the Milvus database:")
 collections_list = conn.list_collections()
 for i, collection in enumerate(collections_list):
-    st.code(f"{i} {collection} contains {conn.count_entities(collection)} entities")
+    # st.code(f"{i} {collection} contains {conn.count_entities(collection)} entities")
+    st.code(f"{i} {collection}")
 
 medium_articles = conn.get_collection("medium_articles")
 
