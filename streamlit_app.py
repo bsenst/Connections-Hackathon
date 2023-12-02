@@ -46,7 +46,7 @@ end_time = time.time()
 
 if st.button("Perform L2 distance vector search"):
 
-    type(result)
+    st.write(type(result))
 
     # for hits in result:
     #     skip = [0]
